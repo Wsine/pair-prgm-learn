@@ -1,0 +1,5 @@
+Below is arduino code with mostly comments. Please understand the business logic according to the comments and then complete the code. Output the formatted final code only.
+
+```cpp
+{{ scaffold_code }}
+```

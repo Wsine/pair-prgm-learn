@@ -1,0 +1,76 @@
+#include <Servo.h>
+
+#define SERVO_PIN 9
+#define TOL   50
+#define K   5
+
+Servo myservo;
+int int_position = 90;
+
+// variables for light intensity to ADC reading equations
+int int_adc0, int_adc0_m, int_adc0_c;
+int int_adc1, int_adc1_m, int_adc1_c;
+int int_left, int_right;
+
+void setup()
+{
+  Serial.begin(115200);
+  myservo.attach(SERVO_PIN);
+  myservo.write(int_position);
+  Serial.println();
+
+  Serial.println("Calibration in progress, put the sensors under the light (~ 5 sec) ......");
+  Serial.println("***********************");
+  delay(5000);
+
+  int_adc0 = analogRead(A0);
+  int_adc1 = analogRead(A1);
+  Serial.print("Left : ");
+  Serial.println(int_adc0);
+  Serial.print("Right : ");
+  Serial.println(int_adc1);
+  delay(1000);
+
+  Serial.println("\nCalibration in progress, cover the sensors with your fingers (~ 8 sec to set)......");
+  Serial.println("************ Put Fingers *****************");
+  delay(5000);
+  Serial.println("********* START Calibration **************");
+
+  int_adc0_c = analogRead(A0);
+  int_adc1_c = analogRead(A1);
+
+  int_adc0_m = (int_adc0 - int_adc0_c) / 100;
+  int_adc1_m = (int_adc1 - int_adc1_c) / 100;
+  delay(10000);
+
+  Serial.println("\n******** Completed! Remove your hands ********");
+  delay(4000);
+}
+
+void loop()
+{
+  int_left = (analogRead(A0) - int_adc0_c) / int_adc0_m;
+  int_right = (analogRead(A1) - int_adc1_c) / int_adc1_m;
+
+  Serial.print("Left sensor intensity = ");
+  Serial.print(int_right);
+  Serial.print(";  Right sensor intensity = ");
+  Serial.print(int_left);
+  Serial.print(";  Servo Speed (-90 to 90) = ");
+  Serial.println(int_position - 90);
+
+  tracker();
+  delay(100);
+}
+
+void tracker()
+{
+  int int_error = int_left - int_right;
+
+  if (abs(int_error) > TOL)
+  {
+    int_position = int_position + K * int_error;
+    int_position = constrain(int_position, 0, 180);
+    myservo.write(int_position);
+  }
+}
