@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>example/simple_timer.ino</title>
+</head>
+<body bgcolor="white">
+<hr/>
+completement/simple_timer.ino<p></p><pre>
+/*
+Simple program that triggers an interrupt every 1 second.
+*/
+
+<a name="0"></a><font color="#FF0000"><a href="match0-0.html#0" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_92.gif"/></a>
+
+void setup() {
+  Serial.begin(115200);
+  
+  // Disable global interrupts
+  cli();
+
+  // Reset Timer 1
+  TCCR1A = 0;
+  TCCR1B = 0;
+  TCNT1 = 0;
+
+  // Set the compare match register
+  OCR1A = 15624;
+
+  // Turn on CTC (Clear Timer on Compare) mode
+  TCCR1B |= (1 &lt;&lt; WGM12);
+
+  // Set prescaler to 1024 for Timer 1
+  TCCR1B |= (1 &lt;&lt; CS12) | (1 &lt;&lt; CS10);
+
+  // Enable timer compare interrupt for Timer 1
+  TIMSK1 |= (1 &lt;&lt; OCIE1A);
+
+  // Enable interrupts
+  sei();
+}
+
+// Function to be called when Timer 1 interrupts
+ISR(TIMER1_COMPA_vect) {
+  // Print "Here" in Serial Monitor when Timer 1 hits the compare match value
+  Serial.println("Here");
+</font>}
+
+void loop() {
+  // Nothing needed here for this specific program
+}
+
+</pre>
+</body>
+</html>

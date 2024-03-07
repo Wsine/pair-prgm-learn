@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>example/LoRaTX1.ino</title>
+</head>
+<body bgcolor="white">
+<hr/>
+example/LoRaTX1.ino<p></p><pre>
+#include &lt;Arduino.h&gt;
+
+#include &lt;SPI.h&gt;
+#include &lt;LoRa.h&gt;
+#include &lt;Wire.h&gt;
+ 
+#define ss 15
+#define rst 16
+#define dio0 4
+
+<a name="0"></a><font color="#FF0000"><a href="match0-1.html#0" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_93.gif"/></a>
+
+void setup() {
+  //initialize Serial Monitor
+  Serial.begin(115200);
+  while (!Serial);
+  Serial.println("LoRa Sender");
+
+  //setup LoRa transceiver module
+  LoRa.setPins(ss, rst, dio0);
+  
+
+  if (!LoRa.begin(433E6)) {
+    Serial.println("Starting LoRa failed!");
+    while (1);
+  }
+
+  Serial.println("LoRa Initializing OK!");
+  
+}
+
+void loop() {
+  Serial.println("Sending packet: ");
+  Serial.println("Channel Frequency for S1: 439MHz, Channel Frequency for S2: 441MHz");
+  //Send LoRa packet to receiver
+  LoRa.beginPacket();
+  LoRa.print("Channel Frequency for S1: 439MHz, Channel Frequency for S2: 441MHz");
+</font>
+  LoRa.endPacket();
+}</pre>
+</body>
+</html>

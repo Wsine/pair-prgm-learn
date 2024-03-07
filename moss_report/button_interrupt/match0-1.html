@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>example/button_interrupt.ino</title>
+</head>
+<body bgcolor="white">
+<hr/>
+completement/button_interrupt.ino<p></p><pre>
+/*
+Arduino program that uses an interrupt to toggle an LED on and off when a button is pressed.
+*/
+
+<a name="0"></a><font color="#FF0000"><a href="match0-0.html#0" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_95.gif"/></a>
+
+const int grnLedPin = 9;
+const int buttonPin = 2;
+
+volatile int ledToggle = LOW;
+volatile int lastButtonState = HIGH;
+volatile int buttonState;
+
+void setup() {
+  pinMode(grnLedPin, OUTPUT);
+  pinMode(buttonPin, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(buttonPin), button_ISR, CHANGE);
+}
+
+void loop() {
+  // Nothing to do in the loop() since LED control is done using an interrupt
+}
+
+void button_ISR() {
+  buttonState = digitalRead(buttonPin);
+
+  if (buttonState == LOW &amp;&amp; lastButtonState == HIGH) {
+    ledToggle = !ledToggle;
+    digitalWrite(grnLedPin, ledToggle);
+  }
+
+  lastButtonState = buttonState;
+</font>}
+</pre>
+</body>
+</html>

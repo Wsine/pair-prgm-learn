@@ -1,0 +1,28 @@
+<html>
+<head>
+<title>example/button_basic.ino</title>
+</head>
+<body bgcolor="white">
+<hr/>
+example/button_basic.ino<p></p><pre>
+<a name="0"></a><font color="#FF0000"><a href="match0-1.html#0" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_93.gif"/></a>
+
+const int buttonPin = 2;
+
+int buttonState;
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(buttonPin, INPUT_PULLUP);
+  Serial.begin(115200);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  buttonState = digitalRead(buttonPin);
+  Serial.println(buttonState);
+  delay(100);
+</font>}
+</pre>
+</body>
+</html>

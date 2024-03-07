@@ -1,0 +1,28 @@
+<html>
+<head>
+<title>example/blink.ino</title>
+</head>
+<body bgcolor="white">
+<hr/>
+example/blink.ino<p></p><pre>
+/* 
+Simple program that blinks an LED. 
+Reference: ELEC3848 Lab 1
+*/
+<a name="0"></a><font color="#FF0000"><a href="match0-1.html#0" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_96.gif"/></a>
+
+const int ledPin = 13;             // declare read-only integer ledPin, set to correct pin number 
+
+void setup() {                     // the setup() method is executed only once during powerup
+  pinMode(ledPin, OUTPUT);         // the ledPin PIN is declared as digital output
+}
+
+void loop() {                      // the loop() method is called repeatedly
+  digitalWrite(ledPin, HIGH);      // set a HIGH voltage to ledPin PIN 
+  delay(1000);                     // stop the program for 1000 milliseconds
+  digitalWrite(ledPin, LOW);       // set 0V (ground) to ledPin PIN 
+  delay(1000);                     // stop the program for 1000 milliseconds
+</font>}
+</pre>
+</body>
+</html>

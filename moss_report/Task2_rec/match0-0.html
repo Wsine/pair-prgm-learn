@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>example/Task2_rec.ino</title>
+</head>
+<body bgcolor="white">
+<hr/>
+example/Task2_rec.ino<p></p><pre>
+#include &lt;ESP8266WiFi.h&gt;
+#include &lt;PubSubClient.h&gt;
+
+// WiFi
+<a name="0"></a><font color="#FF0000"><a href="match0-1.html#0" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_46.gif"/></a>
+
+const char *ssid = "WIFI_SSID";          // Enter your WiFi name
+const char *password = "WIFI_PASSWORD";  // Enter WiFi password
+
+// MQTT Broker
+const char *mqtt_broker = "broker IP";  //Enter your MQTT broker's IP
+const char *topic = "GROUP";  //Enter, Create your topic name
+const char *mqtt_username = "client";
+const char *mqtt_password = "test";
+const int mqtt_port = 1883;
+
+WiFiClient espClient;
+PubSubClient client(espClient);
+
+void setup() {
+  // Set software serial baud to 115200;
+  Serial.begin(115200);
+  // connecting to a WiFi network
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+      delay(500);
+      Serial.println("Connecting to WiFi..");
+  }
+  Serial.println("Connected to the WiFi network");
+  //connecting to a mqtt broker
+  client.setServer(mqtt_broker, mqtt_port);
+  client.setCallback(callback);
+  while (!client.connected()) {
+      String client_id = "esp8266-client-";
+</font>      client_id += String(WiFi.macAddress());
+      Serial.printf("The client %s connects the mqtt broker\n", client_id.c_str());
+      if (client.connect(client_id.c_str(), mqtt_username, mqtt_password)) {
+          Serial.println("mqtt broker connected");
+      } else {
+          Serial.print("failed with state ");
+          Serial.print(client.state());
+          delay(2000);
+      }
+  }
+<a name="1"></a><font color="#00FF00"><a href="match0-1.html#1" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_1_25.gif"/></a>
+
+  client.subscribe(topic);
+}
+
+void callback(char *topic, byte *payload, unsigned int length) {
+  Serial.print("Message arrived in topic: ");
+  Serial.println(topic);
+  Serial.print("Message:");
+  for (int i = 0; i &lt; length; i++) {
+      Serial.print((char) payload[i]);
+  }
+  Serial.println();
+}
+
+void loop() {
+</font>  client.loop();
+}
+</pre>
+</body>
+</html>

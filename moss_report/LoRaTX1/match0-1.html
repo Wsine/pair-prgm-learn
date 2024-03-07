@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>example/LoRaTX1.ino</title>
+</head>
+<body bgcolor="white">
+<hr/>
+completement/LoRaTX1.ino<p></p><pre>
+#include &lt;Arduino.h&gt;
+#include &lt;SPI.h&gt;
+#include &lt;LoRa.h&gt;
+#include &lt;Wire.h&gt;
+
+#define ss 15
+#define rst 16
+#define dio0 4
+
+<a name="0"></a><font color="#FF0000"><a href="match0-0.html#0" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_93.gif"/></a>
+
+void setup() {
+  // Initialize Serial Monitor with a baud rate of 115200
+  Serial.begin(115200);
+
+  // Wait for the serial connection
+  while (!Serial);
+
+  // Print "LoRa Sender" to the Serial Monitor
+  Serial.println("LoRa Sender");
+
+  // Set up LoRa transceiver module with ss, rst, and dio0 pins
+  LoRa.setPins(ss, rst, dio0);
+
+  // Initialize LoRa with frequency 433E6 (433MHz) and check if it's successful
+  if (!LoRa.begin(433E6)) {
+    // Print "Starting LoRa failed!" to the Serial Monitor
+    Serial.println("Starting LoRa failed!");
+
+    // Halt the program with an infinite loop
+    while (1);
+  }
+
+  // If LoRa initialized successfully, print "LoRa Initializing OK!" to the Serial Monitor
+  Serial.println("LoRa Initializing OK!");
+}
+
+void loop() {
+  // Print "Sending packet: " to the Serial Monitor
+  Serial.print("Sending packet: ");
+
+  // Print "Channel Frequency for S1: 439MHz, Channel Frequency for S2: 441MHz" to the Serial Monitor
+  Serial.println("Channel Frequency for S1: 439MHz, Channel Frequency for S2: 441MHz");
+
+  // Begin sending LoRa packet to the receiver
+  LoRa.beginPacket();
+
+  // Print the message "Channel Frequency for S1: 439MHz, Channel Frequency for S2: 441MHz" to the LoRa packet
+  LoRa.print("Channel Frequency for S1: 439MHz, Channel Frequency for S2: 441MHz");
+</font>
+  // End the LoRa packet transmission
+  LoRa.endPacket();
+}
+</pre>
+</body>
+</html>

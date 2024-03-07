@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>example/fade.ino</title>
+</head>
+<body bgcolor="white">
+<hr/>
+completement/fade.ino<p></p><pre>
+<a name="0"></a><font color="#FF0000"><a href="match0-0.html#0" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_53.gif"/></a>
+
+const int redPin = 13;
+int brightness = 0;
+int stepAmount = 5;
+
+void setup() {
+  pinMode(redPin, OUTPUT);
+  Serial.begin(115200);
+}
+
+void loop() {
+  analogWrite(redPin, brightness);
+</font>  brightness += stepAmount;
+
+  if (brightness == 0 || brightness == 255) {
+    stepAmount *= -1;
+  }
+
+  Serial.println(brightness);
+  delay(100);
+}
+</pre>
+</body>
+</html>

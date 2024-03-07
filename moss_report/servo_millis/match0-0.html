@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>example/servo_millis.ino</title>
+</head>
+<body bgcolor="white">
+<hr/>
+example/servo_millis.ino<p></p><pre>
+/*****************************************************
+IDP Feedback and control of servo motor (V20210915)
+Potentiometer controlled servo
+*****************************************************/
+
+#include &lt;Servo.h&gt;
+
+<a name="0"></a><font color="#FF0000"><a href="match0-1.html#0" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_97.gif"/></a>
+
+unsigned long t; //Timer definition
+Servo myServo;  //Create servo object to control a servo
+
+void setup() {
+  pinMode(A0, INPUT); //Pin mode definition
+  myServo.attach(9);  //Attaches the servo on pin 9 to the servo object
+  Serial.begin(115200); //Start serial connection
+  t = millis(); //Get current processor time
+  myServo.write(0); //Set position
+  delay(1000);
+}
+
+void loop() {
+  if(millis()&gt;t+15){ //Timed event without delay
+    t = millis(); //Reset timer
+    int inputSignal = analogRead(A0);
+    int pos = map(inputSignal, 0, 1023, 0, 180); //Converting the reading range to 180 degrees
+    myServo.write(pos);
+    Serial.print("  Time : ");
+    Serial.print(t); 
+    Serial.print(" ; Reads Bit : ");
+    Serial.print(inputSignal);
+    Serial.print(" ; Writes angle : ");
+    Serial.println(pos);
+</font>  }
+}
+</pre>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>example/fade.ino</title>
+</head>
+<body bgcolor="white">
+<hr/>
+example/fade.ino<p></p><pre>
+<a name="0"></a><font color="#FF0000"><a href="match0-1.html#0" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_53.gif"/></a>
+
+const int redPin = 13;  // pin for red led
+
+int brightness = 0; // initial brightness of led
+int stepAmount = 5; // brightness step amount
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(redPin, OUTPUT);
+  Serial.begin(115200);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  analogWrite(redPin, brightness);
+</font>  
+  brightness = brightness + stepAmount;
+
+  if (brightness == 0 || brightness == 255)
+    stepAmount = -stepAmount;
+
+  Serial.println(brightness);
+  delay(100);
+  
+  
+}
+</pre>
+</body>
+</html>

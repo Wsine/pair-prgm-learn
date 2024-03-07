@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>example/PWM_Signal.ino</title>
+</head>
+<body bgcolor="white">
+<hr/>
+completement/PWM_Signal.ino<p></p><pre>
+/*
+  Fading LED with counter output
+*/
+
+int led_pin = 8;
+int i = 0;
+
+void setup() {
+  // Set the LED pin as an output
+  pinMode(led_pin, OUTPUT);
+  // Initialize the Serial Monitor
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Increase the LED brightness
+  for (i = 0; i &lt;= 255; i++) {
+    analogWrite(led_pin, i);
+    
+    // Print counter values
+    Serial.print("Counter1: ");
+    Serial.print(i);
+    Serial.print(", ");
+    Serial.println("Counter2: 255");
+
+    // Pause between increasing the brightness
+    delay(10);
+  }
+
+  // Decrease the LED brightness
+<a name="0"></a><font color="#FF0000"><a href="match0-0.html#0" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_30.gif"/></a>
+
+  for (i = 255; i &gt;= 0; i--) {
+    analogWrite(led_pin, i);
+    
+    // Print counter values
+    Serial.print("Counter1: ");
+    Serial.print(i);
+    Serial.print(", ");
+    Serial.println("Counter2: 0");
+
+    // Pause between decreasing the brightness
+    delay(10);
+</font>  }
+}
+</pre>
+</body>
+</html>

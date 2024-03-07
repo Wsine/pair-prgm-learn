@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>example/button_basic.ino</title>
+</head>
+<body bgcolor="white">
+<hr/>
+completement/button_basic.ino<p></p><pre>
+/*
+Simple program that reads the state of a button and prints it to the serial monitor.
+*/
+
+// Declare a read-only integer constant named 'buttonPin' and assign the appropriate pin number for the button.
+<a name="0"></a><font color="#FF0000"><a href="match0-0.html#0" target="0"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_93.gif"/></a>
+
+const int buttonPin = 2;
+
+// Declare an integer variable to store the 'buttonState'.
+int buttonState;
+
+// Define the setup() function, which is executed only once during powerup.
+void setup() {
+  // Set the pinMode of the 'buttonPin' as INPUT_PULLUP (internal pull-up resistor).
+  pinMode(buttonPin, INPUT_PULLUP);
+  
+  // Start the Serial communication with a baud rate of 115200.
+  Serial.begin(115200);
+}
+
+// Define the loop() function, which is called repeatedly during the program execution.
+void loop() {
+  // Read the state of the button and store it in 'buttonState'.
+  buttonState = digitalRead(buttonPin);
+
+  // Print the 'buttonState' to the serial monitor.
+  Serial.println(buttonState);
+
+  // Wait for 100 milliseconds before executing the next command.
+  delay(100);
+</font>}
+</pre>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>example/Gyro_rot_3axis.ino</title>
+</head>
+<body bgcolor="white">
+<hr/>
+example/Gyro_rot_3axis.ino<p></p><pre>
+#include &lt;Arduino.h&gt;
+
+#include &lt;Wire.h&gt;
+#include &lt;MPU6050_light.h&gt;
+
+<a name="0"></a><font color="#FF0000"><a href="match0-1.html#0" target="1"><img align="left" alt="other" border="0" src="http://moss.stanford.edu/bitmaps/tm_0_97.gif"/></a>
+
+MPU6050 mpu(Wire);
+unsigned long timer = 0;
+
+void setup() {
+  Serial.begin(115200);                                        
+  Wire.begin();
+  mpu.begin();
+  Serial.println("Calculating gyro offset, do not move MPU6050");
+  Serial.println("............");
+  delay(1000);
+  mpu.calcGyroOffsets();                          // This does the calibration
+  Serial.println("Done");    
+}
+
+void loop() {
+  mpu.update();  
+  if((millis()-timer)&gt;10)                         // print data every 10ms
+  {                                             
+    Serial.print("Pitch (Angle_X) : ");
+    Serial.print(mpu.getAngleX());
+    Serial.print("  Roll  (Angle_Y) : ");
+    Serial.print(mpu.getAngleY());
+    Serial.print("  Yaw   (Angle_Z) : ");
+    Serial.println(mpu.getAngleZ());
+    //Serial.println("==========================");
+    timer = millis();  
+</font>    //delay(1000);
+  }
+}
+</pre>
+</body>
+</html>
